@@ -1,86 +1,85 @@
 package com.example.tetsideaplatform.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tetsideaplatform.ui.theme.Blue10
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreen() {
+fun MainScreen(
+
+) {
 
 
-    ListItem()
+   Surface(
+       modifier = Modifier.fillMaxSize(),
+       color = Blue10
+   ) {
+       Column {
 
-}
+           Card(
+               modifier = Modifier
+                   .fillMaxWidth()
+                   .size(100.dp),
+               colors = CardDefaults.cardColors(Blue10),
+               elevation = CardDefaults.cardElevation(0.dp),
+               shape = RoundedCornerShape(0.dp),
 
-@Composable
-fun ListItem() {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { }
-            .padding(7.dp),
-        shape = RoundedCornerShape(15.dp),
-        elevation = CardDefaults.cardElevation(5.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .padding(7.dp),
-        ) {
+               ) {
+               Column(modifier = Modifier.padding(top = 70.dp)) {
+                   Text(
+                       text = "Список товаров",
+                       modifier = Modifier.fillMaxWidth(),
+                       fontSize = 20.sp,
+                       textAlign = TextAlign.Center,
+                   )
+               }
+           }
 
-            Column {
+           Card(
+               modifier = Modifier
+                   .fillMaxSize()
+                   ,
+               colors = CardDefaults.cardColors(Color.LightGray),
+               elevation = CardDefaults.cardElevation(0.dp),
+               shape = RoundedCornerShape(0.dp),
 
-                Row(horizontalArrangement = Arrangement.Start) {
-                    Text(text = "iPhone 13")
-                }
+               ) {
+               Column(modifier = Modifier.fillMaxWidth()) {
 
-                Row(horizontalArrangement = Arrangement.Start) {
-                    //Здесь реализовать Chips
-                }
+                   SearchBar()
 
-                Row(horizontalArrangement = Arrangement.Start) {
+                   LazyColumn(
+                       modifier = Modifier.fillMaxWidth()
+                   ) {
+                       items(6){
+                           ItemList()
+                       }
+                   }
 
-                    Column(horizontalAlignment = Alignment.Start,
-                        modifier = Modifier
-                            .weight(1f)) {
-                        Text(text = "На складе")
-                        Text(text = "12")
-                    }
+               }
+           }
 
-                    Column(horizontalAlignment = Alignment.Start,
-                        modifier = Modifier
-                            .weight(1f)) {
-                        Text(text = "Дата добавления")
-                        Text(text = "ДД.ММ.ГГГГ")
-                    }
+       }
 
-                }
+   }
 
-            }
-
-        }
-    }
 }
 
 
