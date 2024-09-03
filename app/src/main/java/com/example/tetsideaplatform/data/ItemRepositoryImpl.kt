@@ -1,17 +1,16 @@
 package com.example.tetsideaplatform.data
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.example.tetsideaplatform.domain.ItemRepository
 import com.example.tetsideaplatform.domain.model.ItemDomain
 
-class ItemRepositoryImpl(
-    application: Application
+class ItemRepositoryImpl (
+    private val itemDao: ItemDao,
+    private val mapper: ItemMapper
 ): ItemRepository {
 
-    private val itemDao = AppDataBase.getInstance(application).itemDao()
-    private val mapper = ItemMapper()
+
 
     override suspend fun dellItem(item: ItemDomain) {
         itemDao.deleteItem(item.id)
@@ -26,4 +25,6 @@ class ItemRepositoryImpl(
             value = mapper.mapListDbModelToListEntity(it)
         }
     }
+
+
 }

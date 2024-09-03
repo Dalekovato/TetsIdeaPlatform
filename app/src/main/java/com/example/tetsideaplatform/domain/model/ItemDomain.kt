@@ -1,7 +1,7 @@
 package com.example.tetsideaplatform.domain.model
 
 
-class ItemDomain (
+data class ItemDomain (
 
     val id: Int ,
     val name: String,

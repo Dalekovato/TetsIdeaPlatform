@@ -22,9 +22,7 @@ import com.example.tetsideaplatform.ui.theme.Blue10
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreen(
-
-) {
+fun MainScreen() {
 
 
    Surface(
@@ -68,7 +66,7 @@ fun MainScreen(
                    LazyColumn(
                        modifier = Modifier.fillMaxWidth()
                    ) {
-                       items(6){
+                       items(5){
                            ItemList()
                        }
                    }

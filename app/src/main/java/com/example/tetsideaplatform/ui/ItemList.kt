@@ -19,8 +19,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LiveData
+import com.example.tetsideaplatform.domain.model.ItemDomain
 import com.example.tetsideaplatform.ui.theme.Orange10
 import com.example.tetsideaplatform.ui.theme.Purple10
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun ItemList() {
@@ -89,4 +93,5 @@ fun ItemList() {
 
 }
 
-
+fun formatDate(date: Long):String =
+    SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date)

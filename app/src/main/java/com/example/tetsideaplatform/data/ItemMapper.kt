@@ -5,7 +5,7 @@ import com.example.tetsideaplatform.domain.model.ItemDomain
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class ItemMapper {
+class ItemMapper  {
 
 
     fun mapEntityToDto(item: ItemDomain)= ItemDto(

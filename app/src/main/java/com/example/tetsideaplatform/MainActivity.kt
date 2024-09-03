@@ -8,6 +8,8 @@ import com.example.tetsideaplatform.ui.MainScreen
 import com.example.tetsideaplatform.ui.theme.TetsIdeaPlatformTheme
 
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -17,6 +19,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
 
 
