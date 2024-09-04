@@ -2,6 +2,7 @@ package com.example.tetsideaplatform.domain
 
 import androidx.lifecycle.LiveData
 import com.example.tetsideaplatform.domain.model.ItemDomain
+import kotlinx.coroutines.flow.Flow
 
 interface ItemRepository {
 
@@ -9,5 +10,5 @@ interface ItemRepository {
 
     suspend fun editItem(item: ItemDomain)
 
-    fun getItemList(): LiveData<List<ItemDomain>>
+    fun getItemList(): Flow<List<ItemDomain>>
 }

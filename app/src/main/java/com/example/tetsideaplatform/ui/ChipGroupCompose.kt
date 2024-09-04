@@ -1,8 +1,6 @@
 package com.example.tetsideaplatform.ui
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,12 +23,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tetsideaplatform.ui.theme.PurpleGrey40
-import com.example.tetsideaplatform.ui.theme.PurpleGrey80
 
 @Composable
-fun ChipGroupCompose(){
+fun ChipGroupCompose(tags: List<String>) {
 
-    val chipList: List<String> = listOf(
+    val mokChipList: List<String> = listOf(
         "Spent",
         "Add",
         "Saving"
@@ -44,9 +41,8 @@ fun ChipGroupCompose(){
             .padding(10.dp)
             .fillMaxWidth()
     ){
-        chipList.forEach{
+        tags.forEach{
             Chip(title = it, selected = selected) {
-
             }
         }
     }

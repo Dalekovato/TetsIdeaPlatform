@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.LiveData
 import com.example.tetsideaplatform.domain.model.ItemDomain
 import com.example.tetsideaplatform.ui.theme.Orange10
 import com.example.tetsideaplatform.ui.theme.Purple10
@@ -27,7 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun ItemList() {
+fun ItemList(item: ItemDomain) {
 
     Card (
         modifier = Modifier
@@ -41,7 +40,7 @@ fun ItemList() {
             Row (modifier = Modifier.fillMaxWidth()){
 
                 Text(
-                    text = "iPhone 13",
+                    text = item.name,
                     fontSize = 20.sp,
                     modifier = Modifier.fillMaxWidth()
                         .weight(1f)
@@ -63,7 +62,7 @@ fun ItemList() {
             }
 
             Row (modifier = Modifier.fillMaxWidth()){
-                ChipGroupCompose()
+                ChipGroupCompose(item.tags)
             }
 
             Row(horizontalArrangement = Arrangement.Start) {
@@ -74,7 +73,7 @@ fun ItemList() {
                         .padding(10.dp)
                 ) {
                     Text(text = "На складе",Modifier.padding(3.dp))
-                    Text(text = "12",Modifier.padding(3.dp))
+                    Text(text = item.amount.toString() ,Modifier.padding(3.dp))
                 }
 
                 Column(horizontalAlignment = Alignment.Start,
@@ -83,7 +82,7 @@ fun ItemList() {
                         .padding(10.dp)
                 ) {
                     Text(text = "Дата добавления",Modifier.padding(3.dp))
-                    Text(text = "ДД.ММ.ГГГГ",Modifier.padding(3.dp))
+                    Text(text = formatDate(item.time),Modifier.padding(3.dp))
                 }
 
             }

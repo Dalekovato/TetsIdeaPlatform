@@ -72,10 +72,14 @@ dependencies {
 
     implementation ("com.google.code.gson:gson:2.11.0")
 
-    // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
     // LiveData
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.6.8")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
+
 
 
     //Corutines

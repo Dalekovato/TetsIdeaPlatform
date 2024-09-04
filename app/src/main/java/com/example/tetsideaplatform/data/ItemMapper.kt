@@ -4,8 +4,9 @@ import androidx.room.TypeConverter
 import com.example.tetsideaplatform.domain.model.ItemDomain
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import javax.inject.Inject
 
-class ItemMapper  {
+class ItemMapper @Inject constructor()  {
 
 
     fun mapEntityToDto(item: ItemDomain)= ItemDto(

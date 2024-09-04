@@ -1,40 +1,49 @@
 package com.example.tetsideaplatform
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.example.tetsideaplatform.data.ItemRepositoryImpl
 import com.example.tetsideaplatform.domain.ItemRepository
 import com.example.tetsideaplatform.domain.model.ItemDomain
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
-    private val itemInteractor: ItemRepository
+
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val itemRepository: ItemRepositoryImpl
 ): ViewModel() {
 
+    private val _items = MutableStateFlow<List<ItemDomain>>(emptyList())
+    val items: StateFlow<List<ItemDomain>> = _items.asStateFlow()
 
-    fun getItems() = itemInteractor.getItemList()
+    init {
+        viewModelScope.launch {
+            itemRepository.getItemList().collect {
+                _items.value = it
+            }
+        }
+    }
 
-    private val _searchItem = MutableStateFlow("")
+    val _searchItem = MutableStateFlow("")
 
-    fun searchItem (string: String){
+    fun searchItem(string: String) {
         _searchItem.value = string
     }
 
-
-    fun deleteItem(item: ItemDomain){
+    fun deleteItem(item: ItemDomain) {
         viewModelScope.launch {
-            itemInteractor.dellItem(item)
+            itemRepository.dellItem(item)
         }
     }
 
-    fun editItem(item: ItemDomain){
+    fun editItem(item: ItemDomain) {
         viewModelScope.launch {
-            itemInteractor.editItem(item)
+            itemRepository.editItem(item)
         }
     }
-
 }

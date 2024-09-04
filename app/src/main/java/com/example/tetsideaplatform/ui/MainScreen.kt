@@ -12,18 +12,29 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tetsideaplatform.MainViewModel
+import com.example.tetsideaplatform.domain.model.ItemDomain
 import com.example.tetsideaplatform.ui.theme.Blue10
 
 //@Preview(showBackground = true)
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: MainViewModel) {
 
-
+    val items = viewModel.items.collectAsState().value
+    var showDialog by remember { mutableStateOf(false) }
+    var currentEditItem by remember { mutableStateOf<ItemDomain?>(null) }
+    var itemToDelete by remember { mutableStateOf<ItemDomain?>(null) }
+    var showDeleteConfirmDialog by remember { mutableStateOf(false) }
 
    Surface(
        modifier = Modifier.fillMaxSize(),
@@ -67,8 +78,8 @@ fun MainScreen() {
                    LazyColumn(
                        modifier = Modifier.fillMaxWidth()
                    ) {
-                       items(5){
-                           ItemList()
+                       items(items.size){
+                           ItemList(items.get(it))
                        }
                    }
 

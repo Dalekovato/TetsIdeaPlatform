@@ -2,9 +2,14 @@ package com.example.tetsideaplatform.domain
 
 import androidx.lifecycle.LiveData
 import com.example.tetsideaplatform.domain.model.ItemDomain
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class ItemInteractorImpl(private val itemRepository: ItemRepository) {
+class ItemInteractorImpl @Inject constructor(private val itemRepository: ItemRepository) {
 
+    fun getItemList(): Flow<List<ItemDomain>> {
+        return itemRepository.getItemList()
+    }
 
     suspend fun dellItem(shopItem: ItemDomain) {
         itemRepository.dellItem(shopItem)
@@ -12,8 +17,6 @@ class ItemInteractorImpl(private val itemRepository: ItemRepository) {
     suspend fun editItem(shopItem: ItemDomain){
         itemRepository.editItem(shopItem)
     }
-    fun getItemList(): LiveData<List<ItemDomain>> {
-        return itemRepository.getItemList()
-    }
+
 
 }
