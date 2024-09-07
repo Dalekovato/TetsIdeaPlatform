@@ -1,12 +1,12 @@
 package com.example.tetsideaplatform.domain.model
 
 
-data class ItemDomain (
+data class Item(
 
-    val id: Int ,
+    val id: Int,
     val name: String,
-    val time: Long,
+    val time: String,
     val tags: List<String>,
-    val amount: Int,
+    val amount: Int
 
-)
+    )

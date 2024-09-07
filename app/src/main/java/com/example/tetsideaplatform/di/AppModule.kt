@@ -1,40 +1,36 @@
 package com.example.tetsideaplatform.di
 
 import android.content.Context
-import androidx.room.Room
-import com.example.tetsideaplatform.data.AppDataBase
-import com.example.tetsideaplatform.data.ItemDao
-import com.example.tetsideaplatform.data.ItemMapper
+import com.example.tetsideaplatform.data.ItemRepository
 import com.example.tetsideaplatform.data.ItemRepositoryImpl
-import com.example.tetsideaplatform.domain.ItemRepository
+import com.example.tetsideaplatform.data.db.LocalDatabase
+import com.example.tetsideaplatform.data.db.ItemDao
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+interface AppModule {
 
 
-    @Provides
-    @Singleton
-    fun provideAppDataBase(@ApplicationContext context: Context):AppDataBase =
-        Room.databaseBuilder(context, AppDataBase::class.java,"data.db")
-            .fallbackToDestructiveMigration()
-            .build()
+    @Binds
+    fun bindItemRepository(authImpl: ItemRepositoryImpl): ItemRepository
 
+    companion object {
 
+        @Provides
+        fun providesDatabase(@ApplicationContext context: Context): LocalDatabase {
+            return LocalDatabase.getInstance(context)
+        }
 
-    @Provides
-    fun provideItemDao(appDataBase: AppDataBase): ItemDao = appDataBase.itemDao()
+        @Provides
+        fun providesItemDAO(database: LocalDatabase): ItemDao {
+            return database.itemDao()
+        }
+    }
 
-
-    @Provides
-    fun provideItemRepositoryImpl(itemDao: ItemDao): ItemRepositoryImpl = ItemRepositoryImpl(itemDao, mapper = ItemMapper())
-
-    @Provides
-    fun provideItemRepository(itemDao: ItemDao): ItemRepository = ItemRepositoryImpl(itemDao, mapper = ItemMapper())
 }
